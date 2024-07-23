@@ -1,7 +1,7 @@
 package com.deutscheBahn.entity.abstracts;
 
-import com.deutscheBahn.entity.concreates.UserRole;
 import com.deutscheBahn.entity.enums.Gender;
+import com.deutscheBahn.entity.enums.RoleType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -42,9 +42,8 @@ public  abstract class BaseUser implements Serializable {
     @Column(nullable = false, unique = true )
     private String phoneNumber;
 
-    @OneToOne
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private UserRole userRole;
+    @Column(nullable = false)
+    private RoleType userRole;
 
     @Enumerated(EnumType.STRING)
     private Gender gender;

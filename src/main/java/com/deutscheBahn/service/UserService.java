@@ -1,10 +1,8 @@
 package com.deutscheBahn.service;
 
-import com.deutscheBahn.entity.concreates.Admin;
 import com.deutscheBahn.entity.concreates.User;
 import com.deutscheBahn.entity.enums.RoleType;
 import com.deutscheBahn.exception.ConflictException;
-import com.deutscheBahn.payload.request.AdminRequest;
 import com.deutscheBahn.payload.request.UserRequest;
 import com.deutscheBahn.payload.response.UserResponse;
 import com.deutscheBahn.repository.AdminRepository;
@@ -18,13 +16,13 @@ import java.time.LocalDateTime;
 import java.util.Locale;
 
 @Service
+
 @RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
     private final AdminRepository adminRepository;
-    private final UserRoleService userRoleService;
-    private final PasswordEncoder passwordEncoder;
+
 
     public ResponseEntity<UserResponse> save(UserRequest userRequest) {
         //Zuerst müssen wir kontrollieren, ob diese User früher gespeichert wurde.
@@ -33,10 +31,10 @@ public class UserService {
         User user= createUserForSave(userRequest);
 
         //Role Setleniyor
-        user.setUserRole(userRoleService.getUserRole(RoleType.USER));
+        user.setUserRole(RoleType.USER);
 
         //Not:password encode ediliyor.
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+       // user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         //Tarih setleniyor
         user.setCreatedDate(LocalDateTime.now());

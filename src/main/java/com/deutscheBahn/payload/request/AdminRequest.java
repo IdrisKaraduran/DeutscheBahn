@@ -1,6 +1,5 @@
 package com.deutscheBahn.payload.request;
 
-import com.deutscheBahn.entity.concreates.UserRole;
 import com.deutscheBahn.entity.enums.Gender;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Email;

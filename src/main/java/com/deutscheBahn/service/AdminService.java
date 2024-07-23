@@ -23,8 +23,7 @@ public class AdminService {
 
     private final AdminRepository adminRepository;
     private final UserRepository userRepository;
-    private final UserRoleService userRoleService;
-    private final PasswordEncoder passwordEncoder;
+
     public ResponseMessage save(AdminRequest request) {
         //var mi diye bakiyoruz
         checkDuplicate(request.getUsername(),request.getPhoneNumber(),request.getEmail());
@@ -35,13 +34,13 @@ public class AdminService {
         if(Objects.equals(request.getUsername(),"ADMIN")) admin.setBuilt_in(true);
 
         //Role Setleniyor
-         admin.setUserRole(userRoleService.getUserRole(RoleType.ADMIN));
+         admin.setUserRole(RoleType.ADMIN);
 
          //Tarih Setleniyor.
         admin.setCreatedDate(LocalDateTime.now());
 
          //Not:password encode ediliyor.
-        admin.setPassword(passwordEncoder.encode(admin.getPassword()));
+       // admin.setPassword(passwordEncoder.encode(admin.getPassword()));
 
 
        Admin saveData = adminRepository.save(admin);
